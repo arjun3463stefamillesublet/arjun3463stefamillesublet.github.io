@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright 11th Floor 3½ Sublet | Plateau Montreal | March–Oct 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #f8f6f3;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f0ede8;
+            --accent: #c47d4e;
+            --accent-light: #d9a07a;
+            --accent-dark: #a35f35;
+            --text-primary: #1a1a1a;
+            --text-secondary: #555555;
+            --text-muted: #888888;
+            --border: #e0dcd5;
+            --success: #4a9e4a;
+            --gradient-warm: linear-gradient(135deg, #c47d4e 0%, #a35f35 100%);
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        body.dark-mode {
+            --bg-primary: #0f1419;
+            --bg-secondary: #1a2332;
+            --bg-card: #1e2a3a;
+            --bg-card-hover: #243447;
+            --accent: #e8a87c;
+            --accent-light: #f0c9a8;
+            --accent-dark: #c48b5f;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a8b5c4;
+            --text-muted: #6b7a8f;
+            --border: #2d3e50;
+            --success: #7bc87b;
+            --gradient-warm: linear-gradient(135deg, #e8a87c 0%, #e85a4f 100%);
+            --shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .top-controls {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            display: flex; gap: 12px; align-items: center;
+        }
+
+        .theme-toggle {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 50%; width: 44px; height: 44px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: var(--shadow);
+            transition: all 0.3s ease; font-size: 1.2rem;
+        }
+        .theme-toggle:hover { transform: scale(1.05); }
+        .theme-toggle .sun { display: none; }
+        .theme-toggle .moon { display: block; }
+        body.dark-mode .theme-toggle .sun { display: block; }
+        body.dark-mode .theme-toggle .moon { display: none; }
+
+        .lang-toggle {
+            display: flex; background: var(--bg-card);
+            border-radius: 30px; padding: 4px;
+            border: 1px solid var(--border); box-shadow: var(--shadow);
+        }
+        .lang-btn {
+            padding: 8px 18px; border: none; background: transparent;
+            color: var(--text-secondary); cursor: pointer; border-radius: 26px;
+            font-family: inherit; font-weight: 500; font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .lang-btn.active { background: var(--accent); color: white; }
+        .lang-btn:hover:not(.active) { color: var(--text-primary); }
+
+        .hero {
+            min-height: 60vh; display: flex; align-items: center;
+            justify-content: center; text-align: center;
+            padding: 100px 20px 60px; background: var(--bg-primary);
+        }
+        body:not(.dark-mode) .hero {
+            background: radial-gradient(ellipse at 20% 80%, rgba(196, 125, 78, 0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(163, 95, 53, 0.04) 0%, transparent 50%),
+                        var(--bg-primary);
+        }
+        body.dark-mode .hero {
+            background: radial-gradient(ellipse at 20% 80%, rgba(232, 168, 124, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(232, 90, 79, 0.05) 0%, transparent 50%),
+                        var(--bg-primary);
+        }
+        .hero-content { max-width: 900px; position: relative; z-index: 1; }
+        .hero-badge {
+            display: inline-block; background: var(--gradient-warm); color: white;
+            padding: 6px 16px; border-radius: 20px; font-size: 0.85rem;
+            font-weight: 600; margin-bottom: 24px; letter-spacing: 0.5px;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600; margin-bottom: 20px; line-height: 1.2;
+        }
+        .hero h1 span { color: var(--accent); }
+        .hero-subtitle { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 30px; }
+        .hero-details { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 30px; }
+        .hero-detail {
+            background: var(--bg-card); padding: 12px 24px; border-radius: 12px;
+            border: 1px solid var(--border); box-shadow: var(--shadow);
+        }
+        .hero-detail strong { color: var(--accent); }
+        .translation-note {
+            background: var(--bg-secondary); padding: 16px 24px; border-radius: 12px;
+            font-size: 0.9rem; color: var(--text-muted); max-width: 600px;
+            margin: 0 auto; border: 1px solid var(--border);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 80px 0; }
+        .section-title {
+            font-family: 'Playfair Display', serif; font-size: 2.2rem;
+            margin-bottom: 40px; text-align: center;
+        }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 3px;
+            background: var(--gradient-warm); margin: 16px auto 0; border-radius: 2px;
+        }
+
+        .videos-section { background: var(--bg-secondary); }
+        .videos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .video-card {
+            background: var(--bg-card); border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--border); box-shadow: var(--shadow);
+            transition: transform 0.3s ease; text-decoration: none; display: block;
+        }
+        .video-card:hover { transform: translateY(-4px); }
+        .video-thumbnail { position: relative; aspect-ratio: 16/9; background: #000; overflow: hidden; }
+        .video-thumbnail img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .video-card:hover .video-thumbnail img { transform: scale(1.05); }
+        .play-button {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 70px; height: 70px; background: rgba(255, 0, 0, 0.9);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.8rem; padding-left: 5px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .video-card:hover .play-button { transform: translate(-50%, -50%) scale(1.1); background: rgba(255, 0, 0, 1); }
+        .video-title { padding: 20px; font-weight: 600; color: var(--text-primary); text-align: center; }
+
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
+        .info-card {
+            background: var(--bg-card); padding: 30px; border-radius: 16px;
+            border: 1px solid var(--border); box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        .info-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .info-card h3 { font-size: 1.3rem; margin-bottom: 16px; color: var(--accent); display: flex; align-items: center; gap: 10px; }
+        .info-card ul { list-style: none; }
+        .info-card li { padding: 8px 0; color: var(--text-secondary); position: relative; padding-left: 20px; }
+        .info-card li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+        .gallery-section { background: var(--bg-primary); }
+        .gallery-category {
+            margin-bottom: 40px; background: var(--bg-secondary); border-radius: 20px;
+            overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow);
+        }
+        .gallery-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 30px; cursor: pointer; transition: background 0.3s ease;
+        }
+        .gallery-header:hover { background: var(--bg-card-hover); }
+        .gallery-header h3 { font-size: 1.4rem; display: flex; align-items: center; gap: 12px; }
+        .gallery-header h3 .count {
+            background: var(--accent); color: white; font-size: 0.8rem;
+            padding: 4px 10px; border-radius: 12px; font-weight: 600;
+        }
+        .toggle-btn {
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--text-secondary); padding: 10px 20px; border-radius: 8px;
+            cursor: pointer; font-family: inherit; font-size: 0.9rem;
+            transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;
+        }
+        .toggle-btn:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+        .toggle-btn .arrow { transition: transform 0.3s ease; }
+        .gallery-category.expanded .toggle-btn .arrow { transform: rotate(180deg); }
+        .gallery-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .gallery-category.expanded .gallery-content { max-height: 5000px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; padding: 0 30px 30px; }
+        .gallery-item { aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; cursor: pointer; position: relative; box-shadow: var(--shadow); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-item .caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 40px 16px 16px; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white; font-size: 0.85rem; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .gallery-item:hover .caption { opacity: 1; }
+
+        .essentials { background: var(--bg-secondary); }
+        .price-banner {
+            background: var(--gradient-warm); color: white; text-align: center;
+            padding: 40px; border-radius: 20px; margin-bottom: 40px; box-shadow: var(--shadow);
+        }
+        .price-banner .price { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; }
+        .price-banner .per-month { font-size: 1.2rem; opacity: 0.9; }
+        .price-banner .includes { margin-top: 16px; font-size: 1rem; opacity: 0.95; }
+
+        .location-highlight {
+            background: var(--bg-card); padding: 40px; border-radius: 20px;
+            text-align: center; margin-bottom: 40px; border: 1px solid var(--border); box-shadow: var(--shadow);
+        }
+        .location-highlight h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 12px; }
+        .location-highlight p { color: var(--text-secondary); font-size: 1.1rem; }
+        .location-highlight .address { color: var(--accent); font-weight: 600; margin-top: 16px; font-size: 1.2rem; }
+
+        .addon-card { background: var(--bg-card); padding: 30px; border-radius: 16px; border: 2px dashed var(--border); margin-top: 40px; }
+        .addon-card h3 { color: var(--accent); margin-bottom: 16px; }
+        .addon-price { font-size: 1.5rem; font-weight: 700; color: var(--success); }
+
+        .contact-section { background: var(--bg-secondary); text-align: center; }
+        .contact-box {
+            background: var(--bg-card); padding: 50px; border-radius: 20px;
+            border: 1px solid var(--border); box-shadow: var(--shadow); max-width: 600px; margin: 0 auto;
+        }
+        .contact-box h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; }
+        .contact-email {
+            display: inline-block; background: var(--gradient-warm); color: white;
+            padding: 16px 32px; border-radius: 12px; font-size: 1.1rem;
+            font-weight: 600; text-decoration: none; margin: 20px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-email:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196, 125, 78, 0.3); }
+        .contact-note { color: var(--text-muted); font-size: 0.95rem; margin-top: 20px; }
+        .application-info { margin-top: 30px; text-align: left; background: var(--bg-secondary); padding: 24px; border-radius: 12px; }
+        body:not(.dark-mode) .application-info { background: var(--bg-primary); }
+        .application-info h4 { margin-bottom: 12px; color: var(--accent); }
+        .application-info li { padding: 6px 0; color: var(--text-secondary); }
+
+        footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9rem; background: var(--bg-primary); }
+
+        .lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 2000; align-items: center;
+            justify-content: center; padding: 40px;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+        .lightbox-close {
+            position: absolute; top: 20px; right: 30px; background: none;
+            border: none; color: white; font-size: 2.5rem; cursor: pointer;
+            opacity: 0.7; transition: opacity 0.3s;
+        }
+        .lightbox-close:hover { opacity: 1; }
+        .lightbox-caption {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            color: white; font-size: 1rem; background: rgba(0,0,0,0.7);
+            padding: 12px 24px; border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 80px 20px 40px; }
+            .hero h1 { font-size: 2rem; }
+            .hero-details { flex-direction: column; align-items: center; }
+            .gallery-header { flex-direction: column; gap: 16px; text-align: center; }
+            .info-grid { grid-template-columns: 1fr; }
+            .price-banner .price { font-size: 2.5rem; }
+            .videos-grid { grid-template-columns: 1fr; }
+            .top-controls { top: 10px; right: 10px; }
+        }
+
+        [data-lang="fr"] { display: none; }
+        body.lang-fr [data-lang="en"] { display: none; }
+        body.lang-fr [data-lang="fr"] { display: block; }
+        body.lang-fr .hero-details [data-lang="fr"],
+        body.lang-fr .info-card li[data-lang="fr"] { display: list-item; }
+        body.lang-fr span[data-lang="fr"],
+        body.lang-fr .toggle-btn span[data-lang="fr"] { display: inline; }
+    </style>
+</head>
+<body>
+    <div class="top-controls">
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+            <span class="moon">🌙</span>
+            <span class="sun">☀️</span>
+        </button>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" onclick="setLang('fr')">FR</button>
+        </div>
+    </div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span data-lang="en">Available March–October 2026</span>
+                <span data-lang="fr">Disponible Mars–Octobre 2026</span>
+            </div>
+            <h1>
+                <span data-lang="en">Bright 11th Floor <span>3½</span> Sublet</span>
+                <span data-lang="fr">Lumineux <span>3½</span> au 11e étage</span>
+            </h1>
+            <p class="hero-subtitle">
+                <span data-lang="en">Plateau Mont-Royal, Montreal • Pool, Gym & 24/7 Security</span>
+                <span data-lang="fr">Plateau Mont-Royal, Montréal • Piscine, Gym & Sécurité 24/7</span>
+            </p>
+            <div class="hero-details">
+                <div class="hero-detail">
+                    <span data-lang="en"><strong>$1,705</strong> / month</span>
+                    <span data-lang="fr"><strong>1 705 $</strong> / mois</span>
+                </div>
+                <div class="hero-detail">
+                    <span data-lang="en"><strong>600</strong> sq. ft.</span>
+                    <span data-lang="fr"><strong>55</strong> m²</span>
+                </div>
+            </div>
+            <div class="translation-note">
+                <span data-lang="en">🇫🇷 Si vous êtes plus à l'aise en français, cliquez sur "FR" en haut à droite.</span>
+                <span data-lang="fr">🇬🇧 If you're more comfortable in English, click "EN" in the top right corner.</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="videos-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span data-lang="en">Video Tours</span>
+                <span data-lang="fr">Visites Vidéo</span>
+            </h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 40px;">
+                <span data-lang="en">📹 Watch these videos to get a complete feel for the apartment and neighborhood!</span>
+                <span data-lang="fr">📹 Regardez ces vidéos pour découvrir l'appartement et le quartier!</span>
+            </p>
+            <div class="videos-grid">
+                <a href="https://youtu.be/5oxGO_pHAN8" target="_blank" class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/5oxGO_pHAN8/maxresdefault.jpg" alt="Apartment Tour">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-title">
+                        <span data-lang="en">Detailed Apartment Tour</span>
+                        <span data-lang="fr">Visite Détaillée de l'Appartement</span>
+                    </div>
+                </a>
+                <a href="https://youtu.be/c7CN_At1Je4" target="_blank" class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/c7CN_At1Je4/maxresdefault.jpg" alt="Building Tour">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-title">
+                        <span data-lang="en">Building & Facilities Tour</span>
+                        <span data-lang="fr">Visite de l'Immeuble et des Installations</span>
+                    </div>
+                </a>
+                <a href="https://youtu.be/l5r1zHouDxw" target="_blank" class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/l5r1zHouDxw/maxresdefault.jpg" alt="Neighborhood Tour">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-title">
+                        <span data-lang="en">Neighborhood Tour (Google Maps)</span>
+                        <span data-lang="fr">Visite du Quartier (Google Maps)</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="essentials">
+        <div class="container">
+            <h2 class="section-title">
+                <span data-lang="en">The Essentials</span>
+                <span data-lang="fr">L'Essentiel</span>
+            </h2>
+            <div class="price-banner">
+                <div class="price">$1,705</div>
+                <div class="per-month">
+                    <span data-lang="en">per month</span>
+                    <span data-lang="fr">par mois</span>
+                </div>
+                <div class="includes">
+                    <span data-lang="en">Hot water, Heating & High-Speed WiFi included</span>
+                    <span data-lang="fr">Eau chaude, Chauffage & WiFi haute vitesse inclus</span>
+                </div>
+            </div>
+            <div class="location-highlight">
+                <h3>
+                    <span data-lang="en">Prime Location</span>
+                    <span data-lang="fr">Emplacement Privilégié</span>
+                </h3>
+                <p>
+                    <span data-lang="en">Sainte-Famille St & Milton St (Milton-Parc / Lower Plateau)</span>
+                    <span data-lang="fr">Rue Sainte-Famille & rue Milton (Milton-Parc / Bas-Plateau)</span>
+                </p>
+                <div class="address">3463 rue Sainte-Famille, Montreal, QC H2X 2K7</div>
+            </div>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>🏠 <span data-lang="en">The Apartment</span><span data-lang="fr">L'Appartement</span></h3>
+                    <ul>
+                        <li data-lang="en">Queen Size Bed with duvet & sheets included</li>
+                        <li data-lang="fr">Lit Queen avec couette et draps inclus</li>
+                        <li data-lang="en">Large TV with Amazon Fire Stick</li>
+                        <li data-lang="fr">Grande TV avec Amazon Fire Stick</li>
+                        <li data-lang="en">Convertible couch (great for guests)</li>
+                        <li data-lang="fr">Canapé convertible (idéal pour les invités)</li>
+                        <li data-lang="en">Private balcony with Mt Royal & Downtown views</li>
+                        <li data-lang="fr">Balcon privé avec vue sur le Mont Royal et le centre-ville</li>
+                        <li data-lang="en">Fully equipped kitchen (fridge, microwave, stove, dishwasher)</li>
+                        <li data-lang="fr">Cuisine équipée (frigo, micro-ondes, cuisinière, lave-vaisselle)</li>
+                        <li data-lang="en">Huge storage spaces & closets</li>
+                        <li data-lang="fr">Grands espaces de rangement & placards</li>
+                        <li data-lang="en">Very soundproof unit</li>
+                        <li data-lang="fr">Appartement très insonorisé</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>🏢 <span data-lang="en">Building Amenities</span><span data-lang="fr">Commodités de l'Immeuble</span></h3>
+                    <ul>
+                        <li data-lang="en">Heated indoor swimming pool (free)</li>
+                        <li data-lang="fr">Piscine intérieure chauffée (gratuite)</li>
+                        <li data-lang="en">Sauna & Gym (free)</li>
+                        <li data-lang="fr">Sauna & Gym (gratuit)</li>
+                        <li data-lang="en">24/7 reception & doorman</li>
+                        <li data-lang="fr">Réception & portier 24/7</li>
+                        <li data-lang="en">Laundry room on ground floor</li>
+                        <li data-lang="fr">Buanderie au rez-de-chaussée</li>
+                        <li data-lang="en">Lounge & work area</li>
+                        <li data-lang="fr">Salon & espace de travail</li>
+                        <li data-lang="en">Garage parking available</li>
+                        <li data-lang="fr">Stationnement en garage disponible</li>
+                        <li data-lang="en">Excellent building management</li>
+                        <li data-lang="fr">Excellente gestion de l'immeuble</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>📍 <span data-lang="en">Location & Transit</span><span data-lang="fr">Emplacement & Transport</span></h3>
+                    <ul>
+                        <li data-lang="en">7-min walk to Place-des-Arts metro (Green Line)</li>
+                        <li data-lang="fr">7 min à pied du métro Place-des-Arts (Ligne Verte)</li>
+                        <li data-lang="en">15-min to Sherbrooke metro (Orange Line)</li>
+                        <li data-lang="fr">15 min du métro Sherbrooke (Ligne Orange)</li>
+                        <li data-lang="en">Bus lines 55, 80 nearby</li>
+                        <li data-lang="fr">Lignes d'autobus 55, 80 à proximité</li>
+                        <li data-lang="en">30 min to YUL Airport</li>
+                        <li data-lang="fr">30 min de l'aéroport YUL</li>
+                        <li data-lang="en">15-min bike ride to Old Port</li>
+                        <li data-lang="fr">15 min à vélo du Vieux-Port</li>
+                        <li data-lang="en">BiXi stations & Communauto nearby</li>
+                        <li data-lang="fr">Stations BiXi & Communauto à proximité</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>🌳 <span data-lang="en">Lifestyle</span><span data-lang="fr">Style de Vie</span></h3>
+                    <ul>
+                        <li data-lang="en">Walk to Mount Royal & Jeanne-Mance Park</li>
+                        <li data-lang="fr">À pied du Mont Royal & Parc Jeanne-Mance</li>
+                        <li data-lang="en">Heart of Quartier des Spectacles</li>
+                        <li data-lang="fr">Au cœur du Quartier des Spectacles</li>
+                        <li data-lang="en">Walkable to McGill University</li>
+                        <li data-lang="fr">À distance de marche de l'Université McGill</li>
+                        <li data-lang="en">Metro & Provigo 5-min walk</li>
+                        <li data-lang="fr">Metro & Provigo à 5 min à pied</li>
+                        <li data-lang="en">Econofitness & Anytime Fitness nearby</li>
+                        <li data-lang="fr">Econofitness & Anytime Fitness à proximité</li>
+                        <li data-lang="en">Best festivals Montreal has to offer!</li>
+                        <li data-lang="fr">Les meilleurs festivals de Montréal!</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="addon-card">
+                <h3>🚴 <span data-lang="en">Optional Add-On: Bike Rental</span><span data-lang="fr">Option: Location de Vélo</span></h3>
+                <p style="color: var(--text-secondary); margin-bottom: 12px;">
+                    <span data-lang="en">My hybrid bike (Decathlon Riverside 500) with winter tires, helmet, pump, and lock.</span>
+                    <span data-lang="fr">Mon vélo hybride (Decathlon Riverside 500) avec pneus d'hiver, casque, pompe et cadenas.</span>
+                </p>
+                <div class="addon-price">
+                    <span data-lang="en">+$10/month</span>
+                    <span data-lang="fr">+10$/mois</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span data-lang="en">Photo Gallery</span>
+                <span data-lang="fr">Galerie Photos</span>
+            </h2>
+
+            <div class="gallery-category">
+                <div class="gallery-header" onclick="toggleGallery(this)">
+                    <h3>🛋️ <span data-lang="en">Living Room & Dining</span><span data-lang="fr">Salon & Salle à Manger</span> <span class="count">15</span></h3>
+                    <button class="toggle-btn"><span data-lang="en">Click to expand</span><span data-lang="fr">Cliquez pour agrandir</span><span class="arrow">▼</span></button>
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Living_room_full_view.jpg" alt="Living room full view"><div class="caption">Living room full view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Living_room_from_balcony_side.jpg" alt="Living room from balcony side"><div class="caption">Living room from balcony side</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Living_room_from_hallway.jpg" alt="Living room from hallway"><div class="caption">Living room from hallway</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Living_room_from_kitchen.jpg" alt="Living room from kitchen"><div class="caption">Living room from kitchen</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Living_room_right_side_view.jpg" alt="Living room right side view"><div class="caption">Living room right side view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Living_room_view_from_balcony.jpg" alt="Living room view from balcony"><div class="caption">Living room view from balcony</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Couch_with_pillows.jpg" alt="Couch with pillows"><div class="caption">Couch with pillows</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/TV_and_glass_table_with_storage.jpg" alt="TV and glass table with storage"><div class="caption">TV and glass table with storage</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/TV_another_view.jpg" alt="TV another view"><div class="caption">TV another view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Dining_table_extended_with_4_chairs.jpg" alt="Dining table with 4 chairs"><div class="caption">Dining table with 4 chairs</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Dining_table_another_view.jpg" alt="Dining table another view"><div class="caption">Dining table another view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Hallway_from_living_room.jpg" alt="Hallway from living room"><div class="caption">Hallway from living room</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Working_table_with_office_chair.jpg" alt="Working table with office chair"><div class="caption">Working table with office chair</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Work_table_and_standing_desk.jpg" alt="Work table and standing desk"><div class="caption">Work table and standing desk</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Work_table_storage.jpg" alt="Work table storage"><div class="caption">Work table storage</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <div class="gallery-header" onclick="toggleGallery(this)">
+                    <h3>🛏️ <span data-lang="en">Bedroom</span><span data-lang="fr">Chambre</span> <span class="count">4</span></h3>
+                    <button class="toggle-btn"><span data-lang="en">Click to expand</span><span data-lang="fr">Cliquez pour agrandir</span><span class="arrow">▼</span></button>
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Bedroom_from_door.jpg" alt="Bedroom from door"><div class="caption">Bedroom from door</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Bedroom_from_hallway.jpg" alt="Bedroom from hallway"><div class="caption">Bedroom from hallway</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Bedroom_from_inside.jpg" alt="Bedroom from inside"><div class="caption">Bedroom from inside</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/Bedroom-with-2-beds.jpeg" alt="Bedroom with 2 beds option"><div class="caption">Bedroom with 2 beds option</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <div class="gallery-header" onclick="toggleGallery(this)">
+                    <h3>🍳 <span data-lang="en">Kitchen</span><span data-lang="fr">Cuisine</span> <span class="count">5</span></h3>
+                    <button class="toggle-btn"><span data-lang="en">Click to expand</span><span data-lang="fr">Cliquez pour agrandir</span><span class="arrow">▼</span></button>
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Kitchen_full_view.jpg" alt="Kitchen full view"><div class="caption">Kitchen full view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Kitchen_from_hallway.jpg" alt="Kitchen from hallway"><div class="caption">Kitchen from hallway</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Kitchen_from_living_room.jpg" alt="Kitchen from living room"><div class="caption">Kitchen from living room</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Kitchen_front_-_sink_storage_and_stove_-_baking_oven.jpg" alt="Kitchen front"><div class="caption">Kitchen front with sink, stove and oven</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Kitchen_left_side_-_microwave_dishwasher_and_fridge.jpg" alt="Kitchen appliances"><div class="caption">Kitchen with microwave, dishwasher and fridge</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <div class="gallery-header" onclick="toggleGallery(this)">
+                    <h3>🚿 <span data-lang="en">Bathroom</span><span data-lang="fr">Salle de Bain</span> <span class="count">8</span></h3>
+                    <button class="toggle-btn"><span data-lang="en">Click to expand</span><span data-lang="fr">Cliquez pour agrandir</span><span class="arrow">▼</span></button>
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Bathroom_-_1.jpg" alt="Bathroom view 1"><div class="caption">Bathroom view 1</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Bathroom_-_inside.jpg" alt="Bathroom inside"><div class="caption">Bathroom inside</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Bathroom_left_side.jpg" alt="Bathroom left side"><div class="caption">Bathroom left side</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Bathroom_wash_basin_and_storage_-_1.jpg" alt="Bathroom washbasin"><div class="caption">Bathroom washbasin and storage</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Bathroom_washbasin_and_storage_-_2.jpg" alt="Bathroom washbasin 2"><div class="caption">Bathroom washbasin and storage 2</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Bathroom_washbasin_and_storage_-_3.jpg" alt="Bathroom washbasin 3"><div class="caption">Bathroom washbasin and storage 3</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Bathroom_washbasin_and_storage_4.jpg" alt="Bathroom washbasin 4"><div class="caption">Bathroom washbasin and storage 4</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Photo_of_bathroom_door_from_inside.jpg" alt="Bathroom door"><div class="caption">Bathroom door from inside</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <div class="gallery-header" onclick="toggleGallery(this)">
+                    <h3>🌅 <span data-lang="en">Balcony</span><span data-lang="fr">Balcon</span> <span class="count">3</span></h3>
+                    <button class="toggle-btn"><span data-lang="en">Click to expand</span><span data-lang="fr">Cliquez pour agrandir</span><span class="arrow">▼</span></button>
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Balcony_and_left_side_downtown_view.jpg" alt="Balcony with downtown view"><div class="caption">Balcony with downtown view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Balcony_another_view.jpg" alt="Balcony another view"><div class="caption">Balcony another view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Balcony_view_left_side.jpg" alt="Balcony view left side"><div class="caption">Balcony view left side</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <div class="gallery-header" onclick="toggleGallery(this)">
+                    <h3>🚪 <span data-lang="en">Entrance & Storage</span><span data-lang="fr">Entrée & Rangement</span> <span class="count">7</span></h3>
+                    <button class="toggle-btn"><span data-lang="en">Click to expand</span><span data-lang="fr">Cliquez pour agrandir</span><span class="arrow">▼</span></button>
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Entrance_1.jpg" alt="Entrance"><div class="caption">Entrance</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Door_from_inside.jpg" alt="Door from inside"><div class="caption">Door from inside</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Coat_hanger_and_storage.jpg" alt="Coat hanger and storage"><div class="caption">Coat hanger and storage</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Storage_area_at_entrance.jpg" alt="Storage area at entrance"><div class="caption">Storage area at entrance</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/apartment/Cleaning_and_storage_area.jpg" alt="Cleaning and storage area"><div class="caption">Cleaning and storage area</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/entrance.jpeg" alt="Building entrance"><div class="caption">Building entrance</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/entrance-old.jpeg" alt="Building entrance alternate"><div class="caption">Building entrance (alternate view)</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <div class="gallery-header" onclick="toggleGallery(this)">
+                    <h3>🏊 <span data-lang="en">Building Amenities</span><span data-lang="fr">Commodités de l'Immeuble</span> <span class="count">12</span></h3>
+                    <button class="toggle-btn"><span data-lang="en">Click to expand</span><span data-lang="fr">Cliquez pour agrandir</span><span class="arrow">▼</span></button>
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/pool.jpeg" alt="Swimming pool"><div class="caption">Swimming pool</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/pool-2.jpeg" alt="Swimming pool view 2"><div class="caption">Swimming pool view 2</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/gym.jpeg" alt="Gym"><div class="caption">Gym</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/sauna.jpeg" alt="Sauna"><div class="caption">Sauna</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/laundry.jpeg" alt="Laundry room"><div class="caption">Laundry room</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/laundry-2.jpeg" alt="Laundry room view 2"><div class="caption">Laundry room view 2</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/Salon Thalia.jpeg" alt="Salon Thalia"><div class="caption">Salon Thalia (Lounge)</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/Salon Thalia 2.jpeg" alt="Salon Thalia view 2"><div class="caption">Salon Thalia (Lounge) view 2</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/thalia.jpeg" alt="Thalia"><div class="caption">Thalia</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/Building view from downtown.jpeg" alt="Building view from downtown"><div class="caption">Building view from downtown</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/terrace.jpeg" alt="Terrace"><div class="caption">Building terrace</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/terraace-3.jpeg" alt="Terrace view"><div class="caption">Terrace view</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <div class="gallery-header" onclick="toggleGallery(this)">
+                    <h3>🌆 <span data-lang="en">Views & Sunsets</span><span data-lang="fr">Vues & Couchers de Soleil</span> <span class="count">28</span></h3>
+                    <button class="toggle-btn"><span data-lang="en">Click to expand</span><span data-lang="fr">Cliquez pour agrandir</span><span class="arrow">▼</span></button>
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/building/view.jpeg" alt="View"><div class="caption">View from apartment</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/General_view.jpg" alt="General view"><div class="caption">General view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Downtown_view.jpg" alt="Downtown view"><div class="caption">Downtown view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Downtown_fall_view.jpg" alt="Downtown fall view"><div class="caption">Downtown fall view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Mt_Royal_view.jpg" alt="Mt Royal view"><div class="caption">Mt Royal view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Mt_Royal_fall_view.jpg" alt="Mt Royal fall view"><div class="caption">Mt Royal fall view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Full_view_-_fall.jpg" alt="Full view - fall"><div class="caption">Full view - fall</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Panorama_sunset.jpg" alt="Panorama sunset"><div class="caption">Panorama sunset</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Nice_sunset.jpg" alt="Nice sunset"><div class="caption">Nice sunset</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Nice_sunset_full_view.jpg" alt="Nice sunset full view"><div class="caption">Nice sunset full view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Nice_sunset_-_downtown_side.jpg" alt="Nice sunset - downtown side"><div class="caption">Nice sunset - downtown side</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Nice_sunset_-_downtown_2.jpg" alt="Nice sunset - downtown 2"><div class="caption">Nice sunset - downtown 2</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Nice_sunset_view_-_mt_royal.jpg" alt="Nice sunset view - Mt Royal"><div class="caption">Nice sunset view - Mt Royal</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Another_beautiful_sunset_-_Mt_Royal_view.jpg" alt="Beautiful sunset"><div class="caption">Beautiful sunset - Mt Royal view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Another_beautiful_sunset_-_Mt_Royal_view_2.jpg" alt="Beautiful sunset 2"><div class="caption">Beautiful sunset - Mt Royal view 2</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Another_beautiful_sunset_-_Mt_Royal_view_-_3.jpg" alt="Beautiful sunset 3"><div class="caption">Beautiful sunset - Mt Royal view 3</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Another_beautiful_sunset_-_Mt_Royal_view_covering_more_buildings_hehe.jpg" alt="Beautiful sunset panorama"><div class="caption">Beautiful sunset - Mt Royal panorama</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Sunset_mt_royal_again.jpg" alt="Sunset Mt Royal"><div class="caption">Sunset Mt Royal</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Sunset_over_mt_royal_and_du_parc.jpg" alt="Sunset over Mt Royal"><div class="caption">Sunset over Mt Royal and du Parc</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Sunset_beyond_mt_royal_-_over_du_parc.jpg" alt="Sunset beyond Mt Royal"><div class="caption">Sunset beyond Mt Royal</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Night_view.jpg" alt="Night view"><div class="caption">Night view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Night_view_-_2.jpg" alt="Night view 2"><div class="caption">Night view 2</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Night_view_-_3.jpg" alt="Night view 3"><div class="caption">Night view 3</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Night_view_-_full.jpg" alt="Night view - full"><div class="caption">Night view - full</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Another_night_view.jpg" alt="Another night view"><div class="caption">Another night view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/More_night_views.jpg" alt="More night views"><div class="caption">More night views</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Winter_view.jpg" alt="Winter view"><div class="caption">Winter view</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Winter_view_full.jpg" alt="Winter view full"><div class="caption">Winter view full</div></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/views/Winter_view_downtown_side.jpg" alt="Winter view downtown side"><div class="caption">Winter view downtown side</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span data-lang="en">Get in Touch</span>
+                <span data-lang="fr">Contactez-moi</span>
+            </h2>
+            <div class="contact-box">
+                <h3>
+                    <span data-lang="en">Interested in this apartment?</span>
+                    <span data-lang="fr">Intéressé par cet appartement?</span>
+                </h3>
+                <p style="color: var(--text-secondary);">
+                    <span data-lang="en">Send me an email and I'll get back to you as soon as possible.</span>
+                    <span data-lang="fr">Envoyez-moi un courriel et je vous répondrai dès que possible.</span>
+                </p>
+                <a href="mailto:arjun3463stefamille@gmail.com" class="contact-email">arjun3463stefamille@gmail.com</a>
+                <p class="contact-note">
+                    <span data-lang="en">📝 Please clearly state the term you are looking to rent the apartment for in your email.</span>
+                    <span data-lang="fr">📝 Veuillez indiquer clairement la période pour laquelle vous souhaitez louer l'appartement dans votre courriel.</span>
+                </p>
+                <div class="application-info">
+                    <h4><span data-lang="en">Application Process</span><span data-lang="fr">Processus de Candidature</span></h4>
+                    <ul>
+                        <li data-lang="en">Minimum 6 months rental</li>
+                        <li data-lang="fr">Location minimum de 6 mois</li>
+                        <li data-lang="en">Credit check and proof of income/enrollment required</li>
+                        <li data-lang="fr">Vérification de crédit et preuve de revenu/inscription requises</li>
+                        <li data-lang="en">Pets allowed and welcome 🐾</li>
+                        <li data-lang="fr">Animaux acceptés et bienvenus 🐾</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>
+            <span data-lang="en">3463 rue Sainte-Famille, Montreal • Available March–October 2026</span>
+            <span data-lang="fr">3463 rue Sainte-Famille, Montréal • Disponible Mars–Octobre 2026</span>
+        </p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <img src="" alt="" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') document.body.classList.add('dark-mode');
+
+        function setLang(lang) {
+            document.body.classList.remove('lang-en', 'lang-fr');
+            if (lang === 'fr') document.body.classList.add('lang-fr');
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === lang.toUpperCase()) btn.classList.add('active');
+            });
+            document.documentElement.lang = lang;
+            localStorage.setItem('lang', lang);
+        }
+        const savedLang = localStorage.getItem('lang') || 'en';
+        if (savedLang === 'fr') setLang('fr');
+
+        function toggleGallery(header) {
+            const category = header.closest('.gallery-category');
+            category.classList.toggle('expanded');
+            const btn = header.querySelector('.toggle-btn');
+            const isExpanded = category.classList.contains('expanded');
+            btn.querySelector('[data-lang="en"]').textContent = isExpanded ? 'Click to collapse' : 'Click to expand';
+            btn.querySelector('[data-lang="fr"]').textContent = isExpanded ? 'Cliquez pour réduire' : 'Cliquez pour agrandir';
+        }
+
+        function openLightbox(item) {
+            const img = item.querySelector('img');
+            const caption = item.querySelector('.caption');
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox-caption').textContent = caption ? caption.textContent : '';
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+        document.getElementById('lightbox').addEventListener('click', (e) => { if (e.target.id === 'lightbox') closeLightbox(); });
+        document.querySelector('.gallery-category').classList.add('expanded');
+    </script>
+</body>
+</html>
