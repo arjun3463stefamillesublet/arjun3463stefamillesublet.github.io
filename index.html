@@ -119,6 +119,7 @@
             border: 1px solid var(--border); box-shadow: var(--shadow);
         }
         .hero-detail strong { color: var(--accent); }
+        .hero-detail .price-old { font-size: 0.85em; font-weight: 500; text-decoration: line-through; opacity: 0.8; margin-left: 6px; }
         .translation-note {
             background: var(--bg-secondary); padding: 16px 24px; border-radius: 12px;
             font-size: 0.9rem; color: var(--text-muted); max-width: 600px;
@@ -212,8 +213,10 @@
             padding: 40px; border-radius: 20px; margin-bottom: 40px; box-shadow: var(--shadow);
         }
         .price-banner .price { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; }
+        .price-banner .price-old { font-size: 1.5rem; opacity: 0.85; text-decoration: line-through; margin-left: 12px; vertical-align: middle; }
         .price-banner .per-month { font-size: 1.2rem; opacity: 0.9; }
         .price-banner .includes { margin-top: 16px; font-size: 1rem; opacity: 0.95; }
+        .price-banner .sublet-note { margin-top: 12px; font-size: 0.95rem; opacity: 0.95; font-style: italic; }
 
         .location-highlight {
             background: var(--bg-card); padding: 40px; border-radius: 20px;
@@ -315,8 +318,8 @@
             </p>
             <div class="hero-details">
                 <div class="hero-detail">
-                    <span data-lang="en"><strong>$1,500</strong> / month</span>
-                    <span data-lang="fr"><strong>1 500 $</strong> / mois</span>
+                    <span data-lang="en"><strong>$1,500</strong><span class="price-old">$1,705</span> / month</span>
+                    <span data-lang="fr"><strong>1 500 $</strong><span class="price-old">1 705 $</span> / mois</span>
                 </div>
                 <div class="hero-detail">
                     <span data-lang="en"><strong>600</strong> sq. ft.</span>
@@ -371,6 +374,26 @@
                         <span data-lang="fr">Visite du Quartier (Google Maps)</span>
                     </div>
                 </a>
+                <a href="https://www.youtube.com/watch?v=yFAvr8Xr0i4" target="_blank" class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/yFAvr8Xr0i4/maxresdefault.jpg" alt="Natural lighting living room">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-title">
+                        <span data-lang="en">Natural lighting in the living room — during the day in the winter</span>
+                        <span data-lang="fr">Lumière naturelle au salon — journée d'hiver</span>
+                    </div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=GRhJvJ-Ew9I" target="_blank" class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/GRhJvJ-Ew9I/maxresdefault.jpg" alt="Natural lighting bedroom">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-title">
+                        <span data-lang="en">Natural lighting in the bedroom — during the day in the winter</span>
+                        <span data-lang="fr">Lumière naturelle à la chambre — journée d'hiver</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -382,11 +405,15 @@
                 <span data-lang="fr">L'Essentiel</span>
             </h2>
             <div class="price-banner">
-                <div class="price">$1,705</div>
+                <div class="price">$1,500 <span class="price-old">$1,705</span></div>
                 <div class="per-month">
                     <span data-lang="en">per month</span>
                     <span data-lang="fr">par mois</span>
                 </div>
+                <p class="sublet-note">
+                    <span data-lang="en">I pay $1,705 for rent, but I am subletting it for $1,500.</span>
+                    <span data-lang="fr">Je paie 1 705 $ de loyer, mais je le sous-loue pour 1 500 $.</span>
+                </p>
                 <div class="includes">
                     <span data-lang="en">Hot water, Heating & High-Speed WiFi included</span>
                     <span data-lang="fr">Eau chaude, Chauffage & WiFi haute vitesse inclus</span>
